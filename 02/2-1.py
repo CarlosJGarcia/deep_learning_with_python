@@ -3,7 +3,6 @@
 # Carlos Garcia, Zaragoza Diciembre 2025
 
 from keras import models
-from keras import Input
 from keras import layers
 from keras.datasets import mnist
 from keras.utils import to_categorical
@@ -18,7 +17,7 @@ print("2. Deficición del modelo y preparación de los datos")
 network = models.Sequential()
 
 # input_shape=[28 * 28]: Specifies the input is a 784 values (1D array)
-network.add(Input(shape=(28 * 28,)))
+network.add(layers.Input(shape=(28 * 28,)))
 
 # Core of the model: 2 Dense layers
 
