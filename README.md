@@ -1,4 +1,5 @@
 # Deep Learning with Python
 François Chollet
 
-Zaragoza, diciembre 2025
+Zaragoza y Logroño
+Diciembre 2025
