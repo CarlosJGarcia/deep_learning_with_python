@@ -48,7 +48,6 @@ def build_model():
 
     return model
 
-print("Hola, mundo!")
 
 # Entrenamiento
 k = 4
