@@ -1,12 +1,13 @@
 # TensorFlow GPU performance test
-# i9 32 GB RAM
-# M2 16 GB RAM: 5' 36''
-# Workstation 32 GB RAM + RTX 3060 12 GB
-
+# Xeon 32 GB RAM + RTX 3060 12 GB: 2' 28''
+# M2   16 GB RAM                 : 5' 36''
+# i9   32 GB RAM                 :
 
 import time
 import numpy as np
 import tensorflow as tf
+from tensorflow import keras
+from keras import models, layers
 
 # ---------------------------
 # Config: synthetic dataset
@@ -33,16 +34,13 @@ y = tf.keras.utils.to_categorical(y, num_classes=n_classes)
 # Define a large model
 # ---------------------------
 print("Building model...")
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(4096, activation='relu', input_shape=(n_features,)),
-    tf.keras.layers.Dense(2048, activation='relu'),
-    tf.keras.layers.Dense(1024, activation='relu'),
-    tf.keras.layers.Dense(n_classes, activation='softmax')
-])
-
-model.compile(optimizer='adam',
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
+model = models.Sequential()
+model.add(layers.Input(shape=(n_features,)))
+model.add(layers.Dense(4096, activation='relu', input_shape=(n_features,)))
+model.add(layers.Dense(2048, activation='relu'))
+model.add(layers.Dense(1024, activation='relu'))
+model.add(layers.Dense(n_classes, activation='softmax'))
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # ---------------------------
 # Benchmark training time
@@ -57,4 +55,10 @@ history = model.fit(X, y,
                     verbose=2)
 end_time = time.time()
 
-print(f"\nTotal training time for {epochs} epochs: {end_time - start_time:.2f} seconds")
+# ---------------------------
+# Show execution time
+# ---------------------------
+total_seconds = end_time - start_time
+minutes = int(total_seconds // 60)
+seconds = total_seconds % 60
+print(f"\nTotal training time for {epochs} epochs: {minutes}' {seconds:.2f}''")
