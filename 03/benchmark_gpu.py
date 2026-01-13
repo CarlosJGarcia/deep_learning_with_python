@@ -1,7 +1,7 @@
 # TensorFlow GPU performance test
-# Xeon 32 GB RAM + RTX 3060 12 GB: 2' 28''
-# M2   16 GB RAM                 : 5' 36''
-# i9   32 GB RAM                 :
+# Xeon 32 GB RAM + RTX 3060 12 GB: 02' 28''
+# M2   16 GB RAM                 : 05' 36''
+# i9   32 GB RAM                 : 39' 47''
 
 import time
 import numpy as np
