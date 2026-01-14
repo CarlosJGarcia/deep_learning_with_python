@@ -31,7 +31,9 @@ y = np.random.randint(0, n_classes, size=(n_samples,))
 y = tf.keras.utils.to_categorical(y, num_classes=n_classes)
 
 # ---------------------------
-# Define a large model
+# Define a large model 
+#   18 Millones de parámetros
+#   75 MB - Durante el entrenamiento se puede llegar a cuadruplicar, aunque aun así es pequeño para 12 GB de RAM
 # ---------------------------
 print("Building model...")
 model = models.Sequential()
@@ -40,6 +42,9 @@ model.add(layers.Dense(4096, activation='relu'))
 model.add(layers.Dense(2048, activation='relu'))
 model.add(layers.Dense(1024, activation='relu'))
 model.add(layers.Dense(n_classes, activation='softmax'))
+
+model.summary()
+
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # ---------------------------
@@ -49,10 +54,7 @@ print("TensorFlow version:", tf.__version__)
 print("Available devices:", tf.config.list_physical_devices())
 
 start_time = time.time()
-history = model.fit(X, y,
-                    epochs=epochs,
-                    batch_size=batch_size,
-                    verbose=2)
+history = model.fit(X, y, epochs=epochs, batch_size=batch_size, verbose=2)
 end_time = time.time()
 
 # ---------------------------
