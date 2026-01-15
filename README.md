@@ -1,8 +1,7 @@
 # Deep Learning with Python
 François Chollet
 
-Zaragoza, Logroño y Reinach
-
+Zaragoza, Logroño y Reinach \
 Diciembre 2025 - Enero 2026
 
 | # | Ejemplo | Dataset | Código |
